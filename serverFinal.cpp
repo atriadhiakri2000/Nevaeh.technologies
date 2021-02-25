@@ -49,9 +49,9 @@ int main(int argc, char const *argv[])
         }
         cout << "<-- START -->" << endl;
         char client_message[100];
-        char server_message[100] = "Hey There...";
+        char server_message[100] = " Hey There...";
         read_client_message = read( client, client_message, 100);
-        cout << ">>>" << client_message << endl;
+        cout << ">>> " << client_message << endl;
         struct timespec start, end;
         send(client, server_message, strlen(server_message), 0);
         cout << "Reply --> ";
