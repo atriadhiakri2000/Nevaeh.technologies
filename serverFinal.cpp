@@ -50,7 +50,7 @@ int main(int argc, char const *argv[])
                 cout << "<-- Not Accepted -->" << endl;
                 exit(EXIT_FAILURE);
         }
-        for (int i = 0; i<1000000; i++){};
+        for (int i = 0; i<1000000000000000; i++){};
         cout << "<-- Client Accepted -->" << endl;
         cout << "<-- START -->" << endl;
         char client_message[100];
