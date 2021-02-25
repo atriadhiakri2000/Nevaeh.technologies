@@ -22,6 +22,7 @@ int main(int argc, char const *argv[])
                 cout << "<-- Connection UnStable -->" << endl;
                 exit(1);
         }
+        cout << "<-- Connection Stable -->" << endl;
         server_add.sin_family = AF_INET;
         server_add.sin_port = htons( PORT );
         if (inet_pton(AF_INET, "127.0.0.1", &server_add.sin_addr) <= 0)
@@ -29,11 +30,13 @@ int main(int argc, char const *argv[])
                 cout << "<-- Invalid Address -->" << endl;
                 exit(1);
         }
+        cout << "<-- Valid Address -->" << endl;
         if (connect(server, (struct sockaddr *)&server_add, sizeof(server_add)) < 0)
         {
                 cout << "<-- Connection failed -->" << endl ;
                 exit(1);
         }
+        cout << "<-- Connection Secured -->" << endl ;
         cout << "<-- START -->" << endl;
         char server_message[100] ;
         char client_message[100] = " Hello There...";
