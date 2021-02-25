@@ -13,47 +13,45 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-        int client = 0, n;
+        int server = 0, read_server_message;
         struct sockaddr_in server_add;
         cout << "Connected" << endl;
-        char msg[10] = {0};
-        if (( client = socket(AF_INET, SOCK_STREAM,0)) < 0)
+        if (( server = socket(AF_INET, SOCK_STREAM,0)) < 0)
         {
-                cout << "\n Socket Created \n" << endl;
+                cout << "<-- Connection UnStable -->" << endl;
                 exit(1);
         }
         server_add.sin_family = AF_INET;
         server_add.sin_port = htons( PORT );
         if (inet_pton(AF_INET, "127.0.0.1", &server_add.sin_addr) <= 0)
         {
-                cout << "\nInvalid address\n" << endl;
+                cout << "<-- Invalid Address -->" << endl;
                 exit(1);
         }
-        if (connect(client, (struct sockaddr *)&server_add, sizeof(server_add)) < 0)
+        if (connect(server, (struct sockaddr *)&server_add, sizeof(server_add)) < 0)
         {
-                cout << "Connection failed" << endl ;
+                cout << "<-- Connection failed -->" << endl ;
                 exit(1);
         }
-        char sm[10] ;
-        char cm[10] = "HI";
-        send(client, cm , strlen(cm), 0);
-        cout << "Message sent." << endl ;
-        n = read(client, sm, 10);
-        cout << sm << endl;
-        cout << "Message Sent" << endl;
+        cout << "<-- START -->" << endl;
+        char server_message[10] ;
+        char client_message[10] = "Hello There...";
+        send(server, client_message , strlen(client_message), 0);
+        cout << "Message sent..." << endl ;
+        read_server_message = read(server, server_message, 10);
+        cout << server_message << endl;
         while(1)
         {
-               // cin.getline(cm, 10);
-               // send(client, cm, strlen(cm), 0);
-                if(strcmp(cm, "QUIT") == 0)
+                if(strcmp(client_message, "QUIT") == 0)
                 {
                         break;
                 }
-                n = read(client, sm, 10);
-                cout << sm << endl;
+                read_server_message = read(server, server_message, 10);
+                cout << ">>>" << server_message << endl;
+                cout << "Reply --> ";
+                cin.getline(client_message, 10);
+                send(server, client_message, strlen(client_message), 0);
                 cout << "Message Sent..." << endl;
-                cin.getline(cm, 10);
-                send(client, cm, strlen(cm), 0);
 
         }
         return 1;
