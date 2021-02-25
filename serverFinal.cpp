@@ -48,18 +48,18 @@ int main(int argc, char const *argv[])
                 exit(EXIT_FAILURE);
         }
         cout << "<-- START -->" << endl;
-        char client_message[10];
-        char server_message[10] = "Hey There";
-        read_client_message = read( client, client_message, 10);
+        char client_message[100];
+        char server_message[100] = "Hey There...";
+        read_client_message = read( client, client_message, 100);
         cout << client_message << endl;
         struct timespec start, end;
         send(client, server_message, strlen(server_message), 0);
-        cin.getline( server_message, 10);
+        cin.getline( server_message, 100);
         send(client, server_message, strlen(server_message), 0);
         while(1)
         {
                 clock_gettime(CLOCK_MONOTONIC, &start);
-                read_client_message = read(client, client_message, 10);
+                read_client_message = read(client, client_message, 100);
                 cout << ">>>"  << client_message << "(Time_Taken_for_reply --> " << end.tv_sec - start.tv_sec << "sec)"<< endl;
                 if(strcmp(client_message, "QUIT") == 0)
                 {
@@ -72,7 +72,7 @@ int main(int argc, char const *argv[])
                         break;
                 }
                 cout << "Reply --> " ;
-                cin.getline(server_message, 10);
+                cin.getline(server_message, 100);
                 send(client, server_message, strlen(server_message), 0);
                 cout << "Message sent..." << endl;
 
