@@ -9,7 +9,7 @@
 #include <arpa/inet.h>
 #include <sys/time.h>
 
-#define PORT 5200
+#define PORT 7600
 using namespace std;
 
 int main(int argc, char const *argv[])
