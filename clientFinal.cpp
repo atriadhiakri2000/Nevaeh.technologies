@@ -42,12 +42,14 @@ int main(int argc, char const *argv[])
         cout << server_message << endl;
         while(1)
         {
-                if(strcmp(client_message, "QUIT") == 0)
+                char server_message[100] = {0};
+                read_server_message = read(server, server_message, 100);
+                if(strcmp(server_message, "QUIT") == 0)
                 {
                         break;
                 }
-                read_server_message = read(server, server_message, 100);
-                cout << ">>>" << server_message << endl;
+                cout << ">>> " << server_message << endl;
+                char client_message[100] = {0};
                 cout << "Reply --> ";
                 cin.getline(client_message, 100);
                 send(server, client_message, strlen(client_message), 0);
@@ -56,4 +58,5 @@ int main(int argc, char const *argv[])
         }
         return 1;
 }
+
 
