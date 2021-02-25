@@ -63,7 +63,7 @@ int main(int argc, char const *argv[])
                 char client_message[100] = {0};
                 read_client_message = read(client, client_message, 100);
                 clock_gettime(CLOCK_MONOTONIC, &end);
-                cout << ">>>"  << client_message << "     (Time_Taken_for_reply --> " << end.tv_sec - start.tv_sec << "sec)"<< endl;
+                cout << ">>> "  << client_message << "          (Time_Taken_for_reply --> " << end.tv_sec - start.tv_sec << "sec)"<< endl;
                 if(strcmp(client_message, "QUIT") == 0)
                 {
                         break;
