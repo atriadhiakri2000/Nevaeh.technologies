@@ -34,11 +34,11 @@ int main(int argc, char const *argv[])
                 exit(1);
         }
         cout << "<-- START -->" << endl;
-        char server_message[10] ;
-        char client_message[10] = "Hello There...";
+        char server_message[100] ;
+        char client_message[100] = "Hello There...";
         send(server, client_message , strlen(client_message), 0);
         cout << "Message sent..." << endl ;
-        read_server_message = read(server, server_message, 10);
+        read_server_message = read(server, server_message, 100);
         cout << server_message << endl;
         while(1)
         {
@@ -46,10 +46,10 @@ int main(int argc, char const *argv[])
                 {
                         break;
                 }
-                read_server_message = read(server, server_message, 10);
+                read_server_message = read(server, server_message, 100);
                 cout << ">>>" << server_message << endl;
                 cout << "Reply --> ";
-                cin.getline(client_message, 10);
+                cin.getline(client_message, 100);
                 send(server, client_message, strlen(client_message), 0);
                 cout << "Message Sent..." << endl;
 
