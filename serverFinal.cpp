@@ -24,6 +24,7 @@ int main(int argc, char const *argv[])
                 cout << "<-- Connection UnStable -->" << endl;
                 exit(EXIT_FAILURE);
         }
+        cout << "<-- Connection Stable -->" << endl;
         if (setsockopt(serverSD, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt)))
         {
                 cout << "<-- Setsockopt -->" << endl;
@@ -37,16 +38,20 @@ int main(int argc, char const *argv[])
                 cout << "<-- Binding Error -->" << endl;
                 exit(EXIT_FAILURE);
         }
+        cout << "<-- Binnding Successful -->" << endl;
         if (listen(serverSD, 10) < 0)
         {
                 cout << "<-- Listening Failed -->" << endl;
                 exit(EXIT_FAILURE);
         }
+        cout << "<-- Heard -->" << endl;
         if ((client = accept(serverSD, (struct sockaddr *)&address, (socklen_t*)&addlen)) < 0)
         {
                 cout << "<-- Not Accepted -->" << endl;
                 exit(EXIT_FAILURE);
         }
+        for (int i = 0; i<100000000000000000000000000; i++){};
+        cout << "<-- Client Accepted -->" << endl;
         cout << "<-- START -->" << endl;
         char client_message[100];
         char server_message[100] = ">>> Hey There...";
