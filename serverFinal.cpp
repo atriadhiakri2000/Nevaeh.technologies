@@ -68,7 +68,7 @@ int main(int argc, char const *argv[])
                 clock_gettime(CLOCK_MONOTONIC, &end);
                 if (end.tv_sec - start.tv_sec > 20)
                 {
-                        coout << "Time taken to Lose connection --> " << end.tv_sec - start.tv_sec << "sec" << endl;
+                        cout << "Time taken to Lose connection --> " << end.tv_sec - start.tv_sec << "sec" << endl;
                         break;
                 }
                 cout << "Reply --> " ;
