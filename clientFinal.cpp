@@ -7,6 +7,7 @@
 #include <sys/types.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <sys/time.h>
 
 #define PORT 5200
 using namespace std;
@@ -38,17 +39,25 @@ int main(int argc, char const *argv[])
         char client_message[100] = "Hello There...";
         send(server, client_message , strlen(client_message), 0);
         cout << "Message sent..." << endl ;
+        struct timespec start, end;
         read_server_message = read(server, server_message, 100);
         cout << server_message << endl;
         while(1)
         {
+                clock_gettime(CLOCK_MONOTONIC, &start);
                 char server_message[100] = {0};
                 read_server_message = read(server, server_message, 100);
                 if(strcmp(server_message, "QUIT") == 0)
                 {
                         break;
                 }
-                cout << ">>> " << server_message << endl;
+                clock_gettime(CLOCK_MONOTONIC, &end);
+                if (end.tv_sec - start.tv_sec > 20)
+                {
+                        cout << "Time taken to Lose connection -->" << end.tv_sec - start.tv_sec << "sec" << endl;
+                        break;
+                }
+                cout << ">>> " << server_message << "(Time_Taken_for_reply --> " << end.tv_sec - start.tv_sec << "sec)<< endl;
                 char client_message[100] = {0};
                 cout << "Reply --> ";
                 cin.getline(client_message, 100);
@@ -56,6 +65,7 @@ int main(int argc, char const *argv[])
                 cout << "Message Sent..." << endl;
 
         }
+        cout << "Connection closed...!" << endl;
         return 1;
 }
 
