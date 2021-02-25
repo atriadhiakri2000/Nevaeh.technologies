@@ -78,7 +78,6 @@ int main(int argc, char const *argv[])
                 cin.getline(server_message, 100);
                 send(client, server_message, strlen(server_message), 0);
                 cout << "Message sent..." << endl;
-
         }
         cout << "Connection closed...!" << endl;
         close(serverSD);
