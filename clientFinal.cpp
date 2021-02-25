@@ -36,7 +36,7 @@ int main(int argc, char const *argv[])
         }
         cout << "<-- START -->" << endl;
         char server_message[100] ;
-        char client_message[100] = "Hello There...";
+        char client_message[100] = " Hello There...";
         send(server, client_message , strlen(client_message), 0);
         cout << "Message sent..." << endl ;
         struct timespec start, end;
@@ -57,7 +57,7 @@ int main(int argc, char const *argv[])
                         cout << "Time taken to Lose connection -->" << end.tv_sec - start.tv_sec << "sec" << endl;
                         break;
                 }
-                cout << ">>> " << server_message << "(Time_Taken_for_reply --> " << end.tv_sec - start.tv_sec << "sec)<< endl;
+                cout << ">>> " << server_message << "          (Time_Taken_for_reply --> " << end.tv_sec - start.tv_sec << "sec)"<< endl;
                 char client_message[100] = {0};
                 cout << "Reply --> ";
                 cin.getline(client_message, 100);
