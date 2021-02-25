@@ -47,11 +47,11 @@ int main(int argc, char const *argv[])
                 clock_gettime(CLOCK_MONOTONIC, &start);
                 char server_message[100] = {0};
                 read_server_message = read(server, server_message, 100);
+                clock_gettime(CLOCK_MONOTONIC, &end);
                 if(strcmp(server_message, "QUIT") == 0)
                 {
                         break;
                 }
-                clock_gettime(CLOCK_MONOTONIC, &end);
                 if (end.tv_sec - start.tv_sec > 20)
                 {
                         cout << "Time taken to Lose connection -->" << end.tv_sec - start.tv_sec << "sec" << endl;
