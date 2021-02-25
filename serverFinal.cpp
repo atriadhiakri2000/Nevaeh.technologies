@@ -47,7 +47,7 @@ int main(int argc, char const *argv[])
                 cout << "<-- Not Accepted -->" << endl;
                 exit(EXIT_FAILURE);
         }
-         cout << "<-- START -->" << endl;
+        cout << "<-- START -->" << endl;
         char client_message[100];
         char server_message[100] = "Hey There...";
         read_client_message = read( client, client_message, 100);
@@ -62,12 +62,12 @@ int main(int argc, char const *argv[])
                 clock_gettime(CLOCK_MONOTONIC, &start);
                 char client_message[100] = {0};
                 read_client_message = read(client, client_message, 100);
-                cout << ">>>"  << client_message << "(Time_Taken_for_reply --> " << end.tv_sec - start.tv_sec << "sec)"<< endl;
+                clock_gettime(CLOCK_MONOTONIC, &end);
+                cout << ">>>"  << client_message << "     (Time_Taken_for_reply --> " << end.tv_sec - start.tv_sec << "sec)"<< endl;
                 if(strcmp(client_message, "QUIT") == 0)
                 {
                         break;
                 }
-                clock_gettime(CLOCK_MONOTONIC, &end);
                 if (end.tv_sec - start.tv_sec > 20)
                 {
                         cout << "Time taken to Lose connection -->" << end.tv_sec - start.tv_sec << "sec" << endl;
