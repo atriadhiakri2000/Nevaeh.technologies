@@ -43,7 +43,7 @@ int main(int argc, char const *argv[])
                 cout << "<-- Connection failed -->" << endl ;
                 exit(1);
         }
-        for (int i = 0; i<1000000000000000; i++){};
+        for (int i = 0; i<10000; i++){};
         cout << "<-- Connection Secured -->" << endl ;
         cout << "<-- START -->" << endl;
         ofstream of("Client_Log.txt");
