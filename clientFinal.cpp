@@ -9,11 +9,18 @@
 #include <arpa/inet.h>
 #include <sys/time.h>
 
-#define PORT 7600
+//#define PORT 7600
 using namespace std;
 
 int main(int argc, char const *argv[])
 {
+        cout << argc << "    " << argv[1] << endl;
+        if (argc < 3)
+        {
+                cout << "<-- PORT NOT ACCESSIBLE -->" << endl;
+                exit(EXIT_FAILURE);
+        }
+        int PORT = atoi(argv[2]);
         int server = 0, read_server_message;
         struct sockaddr_in server_add;
         cout << "Connected" << endl;
