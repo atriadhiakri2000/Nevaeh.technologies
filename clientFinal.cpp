@@ -8,13 +8,13 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <sys/time.h>
+#include <fstream>
 
 //#define PORT 7600
 using namespace std;
 
 int main(int argc, char const *argv[])
 {
-        cout << argc << "    " << argv[1] << endl;
         if (argc < 3)
         {
                 cout << "<-- PORT NOT ACCESSIBLE -->" << endl;
@@ -46,9 +46,11 @@ int main(int argc, char const *argv[])
         for (int i = 0; i<1000000000000000; i++){};
         cout << "<-- Connection Secured -->" << endl ;
         cout << "<-- START -->" << endl;
+        ofstream of("Client_Log.txt");
         char server_message[100] ;
         char client_message[100] = " Hello There...";
         send(server, client_message , strlen(client_message), 0);
+        of << " CLIENT ---> " << client_message << endl;
         cout << "Message sent..." << endl ;
         struct timespec start, end;
         read_server_message = read(server, server_message, 100);
@@ -73,8 +75,10 @@ int main(int argc, char const *argv[])
                 cout << "Reply --> ";
                 cin.getline(client_message, 100);
                 send(server, client_message, strlen(client_message), 0);
+                of << " CLIENT ---> " << client_message << endl;
                 cout << "Message Sent..." << endl;
         }
+        of.close()
         cout << "Connection closed...!" << endl;
         return 1;
 }
