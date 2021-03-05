@@ -92,10 +92,42 @@ int main(int argc, char const *argv[])
                 cout << "Reply --> " ;
                 cin.getline(server_message, 100);
                 of << " SERVER ---> " << server_message << endl;
-                send(client, server_message, strlen(server_message), 0);
-                cout << "Message sent..." << endl;
+                char PPP[] = "PPP";
+                if (strcmp(PPP, server_message) == 0)
+                {
+                        cout << "<----READY---->" << endl;
+                        int size_of_packet;
+                        cout << " Packect Size --> " ;
+                        cin >> size_of_packet;
+                        string packet;
+                        int size = size_of_packet;
+                        while (size_of_packet > 0)
+                        {
+                                size_of_packet -= 1;
+                                string lines;
+                                cout << " Line " << size - size_of_packet << " --> " ;
+                                cin >> lines;
+                                for(int i=0; i<lines.length(); i++)
+                                {
+                                        packet.push_back(lines[i]);
+                                }
+
+                                //packet.push_back("\n");
+                        }
+                        char server_message2[packet.length() + 1];
+                        strcpy(server_message2, packet.c_str());
+                        send(client, server_message2, strlen(server_message2), 0);
+                        of2 << " Packect ---> " << "\n" << server_message2 << endl;
+                        cout << " Packet Sent..." << endl;
+                }
+                else
+                {
+                        send(client, server_message, strlen(server_message), 0);
+                        cout << "Message sent..." << endl;
+                }
         }
         of.close();
+        of2.close();
         cout << "Connection closed...!" << endl;
         close(serverSD);
         close(client);
